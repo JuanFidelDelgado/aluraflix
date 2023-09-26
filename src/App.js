@@ -8,14 +8,36 @@ import { temaClaro, temaOscuro } from './components/Ui/temas';
 import { ButtonTema } from './components/Ui';
 import SwitcherTema from './components/SwitcherTema';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Formulario from './components/Formulario';
+import FormularioVideo from './components/FormularioVideo';
+import FormularioCategoria from './components/FormularioCategoria';
+import Boton from './components/Botones';
 
 function App() {
 
+  //Estado y función para mostrar el formulario de nuevo vídeo
+  const [mostrarVideo, setMostrarVideo] = useState(false);
+  const mostrarFormularioVideo = () => {
+    setMostrarVideo(!mostrarVideo);
+  }
+
+  //Estado y función para mostrar el formulario de nueva categoría
+  const [mostrarCategoria, setMostrarCategoria] = useState(false);
+  const mostrarFormularioCategoria = () => {
+    setMostrarCategoria(!mostrarCategoria);
+  }
+
+  //Styled component del cuerpo de la página
   const StyledBody = styled.div`
   background: ${({ theme }) => theme.body};
   `
 
+  const StyledContenedor = styled.div`
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+  `
+
+  //Estado y función para cambiar el tema de la página
   const [tema, setTema] = useState(true);
   const toogleTema = () => {
     setTema((tema) => !tema);
@@ -30,7 +52,12 @@ function App() {
         <GlobalStyle />
         <Header />
         <StyledBody>
-          <Formulario />
+          <StyledContenedor>
+            <Boton texto="Nuevo vídeo" cambiarMostrar={mostrarFormularioVideo} />
+            <Boton texto="Nuevo categoría" cambiarMostrar={mostrarFormularioCategoria} />
+          </StyledContenedor>
+          {mostrarVideo ? <FormularioVideo /> : <></>}
+          {mostrarCategoria ? <FormularioCategoria /> : <></>}
           <Routes>
             <Route />
           </Routes>

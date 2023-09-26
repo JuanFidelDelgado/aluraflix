@@ -27,8 +27,7 @@ const StyledH2 = styled.h2`
     color: ${({ theme }) => theme.texto};
 `
 
-const Formulario = (props) => {
-
+const FormularioCategoria = (props) => {
     const [titulo, setTitulo] = useState("");
     const [link, setLink] = useState("");
     const [imagen, setImagen] = useState("");
@@ -50,41 +49,10 @@ const Formulario = (props) => {
 
     const manejarEquipo = (e) => {
         e.preventDefault();
-        nuevaCategoria({ titulo, colorPrimario: color });
+        nuevaCategoria({ categoria, colorPrimario: color });
     }
 
-    return <StyledSection className="formulario">
-        <StyledForm onSubmit={manejarEnvio}>
-            <StyledH2>Nuevo vídeo</StyledH2>
-            <Campo
-                label="Título"
-                placeholder="Ingresar título"
-                required={true}
-                valor={titulo}
-                setValor={setTitulo}
-            />
-            <Campo
-                label="Link"
-                placeholder="Link del vídeo"
-                required
-                valor={link}
-                setValor={setLink}
-            />
-            <Campo
-                label="Imagen"
-                placeholder="Link imagen del vídeo"
-                required
-                valor={imagen}
-                setValor={setImagen}
-            />
-            <ListaOpciones
-                valor={categoriaVideo}
-                setEquipo={setCategoriaVideo}
-                equipos={props.equipos}
-            />
-            <BotonCrear texto="Guardar vídeo" />
-        </StyledForm>
-
+    return <StyledSection>
         <StyledForm onSubmit={manejarEquipo}>
             <StyledH2>Crear categoría</StyledH2>
             <Campo
@@ -121,4 +89,4 @@ const Formulario = (props) => {
     </StyledSection>
 };
 
-export default Formulario;
+export default FormularioCategoria;
